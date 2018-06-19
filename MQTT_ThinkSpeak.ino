@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h>
+#include <ESP8266WiFi.h> // TEST
 #include <PubSubClient.h>
 #include "DHT.h"
 
