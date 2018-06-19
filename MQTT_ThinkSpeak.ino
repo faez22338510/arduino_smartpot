@@ -2,6 +2,7 @@
 #include <PubSubClient.h>
 #include "DHT.h"
 
+
 #define DHTTYPE DHT11
 #define DHTPIN D2 
 #define LIGHTPIN A0 // Analog light sensor connected to analog pin A0.
