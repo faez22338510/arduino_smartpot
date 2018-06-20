@@ -10,9 +10,13 @@ char pass[] = "faez22338510";
 int status = WL_IDLE_STATUS;
 WiFiClient  client;
 
+unsigned long lastConnectionTime = 0; 
+const unsigned long postingInterval = 10L * 1000L; // Post data every 10 seconds.
 
-unsigned long myChannelNumber = 516542;
-const char * myReadAPIKey = "HDX272C9ML6S0I9B";
+unsigned long myReadChannelNumber = 521815;
+const char * myReadAPIKey = "CXOHVN4Z7SCYQBU5";
+unsigned long myWriteChannelNumber = 516542;
+const char * myWriteAPIKey = "HDX272C9ML6S0I9B";
 
 void setup() {
 
@@ -24,11 +28,12 @@ void setup() {
 
 void loop() {
   // Read the latest value from field 1 of channel 31461
-  float temp = ThingSpeak.readFloatField(myChannelNumber, 1, myReadAPIKey);
-  
-  Serial.print("Latest TEMP is: "); 
-  Serial.print(temp);
-  Serial.println("temp"); 
+  if (millis() - lastConnectionTime > postingInterval) {
+    float temp = ThingSpeak.readFloatField(myReadChannelNumber, 1, myReadAPIKey); 
+    Serial.print("Latest TEMP is: "); 
+    Serial.print(temp);
+    Serial.println("temp"); 
+    lastConnectionTime = millis();
+  }
 
-  delay(10000);
 }
